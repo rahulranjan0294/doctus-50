@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="90c18b76-448f-40fe-a561-08ae4199a3a6" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="doctus-day7Flow" doc:id="8ce6d582-d41a-46f1-8846-ef4f48444427" >
+		<http:listener doc:name="Listener" doc:id="7ae04bf3-4f49-43ef-b895-d00592774b6b" config-ref="HTTP_Listener_config" path="/start"/>
+		<logger level="INFO" doc:name="Logger" doc:id="c40b9ace-7237-4faf-ab7d-4390fed4a4e4" />
+		<ee:transform doc:name="Transform Message" doc:id="9331ad96-dcac-4d99-b74d-56620fc758fc" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="e715c42e-0572-47ab-842e-64316c2cc23a" />
+	</flow>
+</mule>
